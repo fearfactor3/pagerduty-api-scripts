@@ -1,0 +1,20 @@
+name: Update git-hooks if changes were made to .git-hooks folder.
+on: 
+  # Triggers the workflow on push request,
+  # but only for the feature branches
+  push:
+    paths: 
+      - '.git-hooks/**'
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install latest version of pagerduty cli.
+        run: |
+          apt-get isntall apt-transport-https
+          wget -O - https://packages.pagerduty.com/GPG-KEY-pagerduty
+          apt-key add - sh -c echo deb https://packages.pagerduty.com/pdagent deb/ > /etc/apt/sources.list.d/pdagent.list
+          apt-get update
+          apt-get install pdagent pdagent-integrations
+        shell: bash
