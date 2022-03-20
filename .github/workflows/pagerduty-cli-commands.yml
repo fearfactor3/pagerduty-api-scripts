@@ -6,13 +6,18 @@ on:
 jobs: 
   build:
     runs-on: ubuntu-latest
+    container: 
+      image: pagerdutycs/pagerduty-cli
+      env:
+        GITHUB_RUNNER_HOME: /root
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      ports:
+        - 80     
     steps:
       - uses: actions/checkout@v2
       - name: Install latest version of pagerduty cli.
         run: |
-          sudo apt-get install apt-transport-https
-          wget -O - https://packages.pagerduty.com/GPG-KEY-pagerduty | sudo apt-key add - 
-          sudo sh -c 'echo "deb https://packages.pagerduty.com/pdagent deb/" > /etc/apt/sources.list.d/pdagent.list'
-          sudo apt-get update
-          sudo apt-get install pdagent pdagent-integrations
+          pd version
         shell: bash
