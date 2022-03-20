@@ -24,3 +24,10 @@ jobs:
         run: |  
           pd team:user:add -h
         shell: bash
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo "Silly message"
+        run: |
+          echo "Hello world!"
+        shell: bash
