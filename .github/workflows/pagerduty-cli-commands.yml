@@ -21,11 +21,6 @@ jobs:
       - name: Checking what version PagerDuty CLI is being used.
         run: |
           pd version
-        shell: bash
-  test-job:
-    needs: pagerduty-cli
-    runs-on: ubuntu-latest
-    steps:
       - name: Running PagerDuty team help command.
         run: |  
           pd team:user:add -h
