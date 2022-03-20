@@ -5,6 +5,7 @@ on:
   push:
 jobs: 
   pagerduty-cli:
+    name: Initialize PagerDuty CLI 
     runs-on: ubuntu-latest
     container: 
       image: pagerdutycs/pagerduty-cli:latest
@@ -15,6 +16,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
       ports:
         - 80     
+  test-job:
+    name: Run Hello World!
+    needs: pagerduty-cli
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Checking what version PagerDuty CLI is being used.
@@ -23,13 +28,4 @@ jobs:
       - name: Running PagerDuty team help command.
         run: |  
           pd team:user:add -h
-        shell: bash
-  test-job:
-    name: Run Hello World!
-    needs: pagerduty-cli
-    runs-on: ubuntu-latest
-    steps:
-      - name: echo "Silly message"
-        run: |
-          echo "Hello world!"
         shell: bash
