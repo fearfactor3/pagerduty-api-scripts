@@ -10,9 +10,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install latest version of pagerduty cli.
         run: |
-          apt-get install apt-transport-https
-          wget -O - https://packages.pagerduty.com/GPG-KEY-pagerduty
-          apt-key add - sh -c echo deb https://packages.pagerduty.com/pdagent deb/ > /etc/apt/sources.list.d/pdagent.list
-          apt-get update
-          apt-get install pdagent pdagent-integrations
+          sudo apt-get install apt-transport-https
+          wget -O - https://packages.pagerduty.com/GPG-KEY-pagerduty | sudo apt-key add - 
+          sudo sh -c 'echo "deb https://packages.pagerduty.com/pdagent deb/" > /etc/apt/sources.list.d/pdagent.list'
+          sudo apt-get update
+          sudo apt-get install pdagent pdagent-integrations
         shell: bash
