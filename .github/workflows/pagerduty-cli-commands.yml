@@ -17,7 +17,7 @@ jobs:
       ports:
         - 80     
   test-job:
-    needs: pagerduty-cli
+    needs: Initialize PagerDuty CLI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
