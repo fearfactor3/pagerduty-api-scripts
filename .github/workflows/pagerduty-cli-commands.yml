@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: 
-      image: pagerdutycs/pagerduty-cli
+      image: pagerdutycs/pagerduty-cli:latest
       env:
         GITHUB_RUNNER_HOME: /root
       credentials:
