@@ -20,4 +20,5 @@ jobs:
       - name: Install latest version of pagerduty cli.
         run: |
           pd version
+          pd team:user:add -h
         shell: bash
