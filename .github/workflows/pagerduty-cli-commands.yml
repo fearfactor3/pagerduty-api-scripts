@@ -25,6 +25,8 @@ jobs:
           pd team:user:add -h
         shell: bash
   test-job:
+    name: Run Hello World!
+    needs: pagerduty-cli
     runs-on: ubuntu-latest
     steps:
       - name: echo "Silly message"
