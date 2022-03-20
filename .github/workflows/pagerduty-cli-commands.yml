@@ -17,8 +17,10 @@ jobs:
         - 80     
     steps:
       - uses: actions/checkout@v2
-      - name: Install latest version of pagerduty cli.
+      - name: Checking what version PagerDuty CLI is being used.
         run: |
           pd version
+      - name: Running PagerDuty team help command.
+        run: |  
           pd team:user:add -h
         shell: bash
