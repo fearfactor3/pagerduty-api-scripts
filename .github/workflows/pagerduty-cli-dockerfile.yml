@@ -1,0 +1,29 @@
+name: Publish Docker image
+on: 
+  # Triggers the workflow on push request,
+  # but only for changes to Dockerfile.
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - "Dockerfile"
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+jobs:
+  build-and-push-image-to-repo:
+    name: Push Docker image to Github repo.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Extract metadata (tags, labels) for Docker
+        uses: docker/metadata-action@v1
+        with:
+          images: pagerduty-api-scripts-repo/pagerduty-api-scripts
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.label }}
