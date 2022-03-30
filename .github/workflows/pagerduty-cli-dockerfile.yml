@@ -18,7 +18,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: fearfactor3/pagerduty-api-scripts
+          images: fearfactor3/pagerduty-cli
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to GitHub Container Registry
