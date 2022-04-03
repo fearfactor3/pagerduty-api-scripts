@@ -1,0 +1,35 @@
+name: Configuring team for PagerDuty incident management.
+on: 
+  push:
+jobs: 
+  pagerduty-cli:
+    name: Initial team setup in PagerDuty CLI
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/fearfactor3/pagerduty-cli:latest
+      env:
+        GITHUB_RUNNER_HOME: /root
+      ports:
+        - 80
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checking what version PagerDuty CLI is being used.
+        run: |
+          echo "This is a test."
+          pd version
+      - name: Setting up PagerDuty connection for PagerDuty CLI.
+        run: |
+          # pd auth:use ${{ secrets.PAGERDUTY_AUTH_TOKEN }}
+          pd auth -h
+      - name: Creating Team for PagerDuty monitoring.
+        run: |  
+          # pd team:user:add 
+          pd team:user:add -h
+      - name: Create initial escalation policy for new team in PagerDuty.
+        run: |
+          # pd ep:copy -d ${{ secrets.THIS_NEW_TEAM }} -i ${{ secrets.ID_OF_INITIAL_EP }}
+          pd ep:copy -h
+      - name: Create initial schedule for new team in PagerDuty.
+        run: |
+          # pd schedule:copy -d ${{ secrets.THIS_NEW_TEAM }} -i ${{ secrets.ID_OF_INITIAL_EP }}
+          pd schedule:copy -h

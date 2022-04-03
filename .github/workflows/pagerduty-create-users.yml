@@ -1,0 +1,31 @@
+# name: Create user-account to access PagerDuty.
+# on: 
+#   # Triggers the workflow on push request,
+#   # but only for the feature branches
+#   push:
+# jobs: 
+#   pagerduty-cli:
+#     name: Initial team setup in PagerDuty CLI
+#     runs-on: ubuntu-latest
+#     container: 
+#       image: pagerdutycs/pagerduty-cli:latest
+#       env:
+#         GITHUB_RUNNER_HOME: /root
+#       credentials:
+#         username: ${{ github.actor }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+#       ports:
+#         - 80
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Checking what version PagerDuty CLI is being used.
+#         run: |
+#           pd version
+#       - name: Setting up PagerDuty connection for PagerDuty CLI.
+#         run: |
+#           ## pd auth:use ${{ secrets.PAGERDUTY_AUTH_TOKEN }}
+#           pd auth -h
+#       - name: Create users if they do not exist. 
+#         run: |
+#           ## pd user:create -e ${{ secrets.USER_EMAIL_ADDRESS }} -n ${{ secrets.USERNAME }}
+#           pd user:create -h
