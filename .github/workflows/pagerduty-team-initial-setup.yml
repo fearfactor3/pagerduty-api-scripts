@@ -6,12 +6,9 @@ jobs:
     name: Initial team setup in PagerDuty CLI
     runs-on: ubuntu-latest
     container: 
-      image: pagerdutycs/pagerduty-cli:latest
+      image: ghcr.io/fearfactor3/pagerduty-cli:latest
       env:
         GITHUB_RUNNER_HOME: /root
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
       ports:
         - 80
     steps:

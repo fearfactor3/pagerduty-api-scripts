@@ -2,8 +2,8 @@ name: Publish Docker image
 on: 
   # Triggers the workflow on push request,
   # but only for changes to Dockerfile.
-  # workflow_dispatch:
-  push:
+  workflow_dispatch:
+  # push:
   #   paths:
   #     - "Dockerfile"
 jobs:
