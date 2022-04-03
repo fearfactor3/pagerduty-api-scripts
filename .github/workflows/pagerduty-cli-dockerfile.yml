@@ -1,7 +1,7 @@
 name: Publish PagerDuty - CLI Docker image
 # Triggers the workflow on manually.
 on: 
-  workflow_dispatch
+  workflow_dispatch:
 jobs:
   build-and-push-image-to-repo:
     name: Push Docker image to Github repo.
