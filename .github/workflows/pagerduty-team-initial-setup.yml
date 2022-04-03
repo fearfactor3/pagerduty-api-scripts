@@ -1,4 +1,4 @@
-name: Initialize team for PagerDuty access.
+name: Configuring team for PagerDuty incident management.
 on: 
   push:
 jobs: 

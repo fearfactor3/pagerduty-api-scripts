@@ -1,11 +1,7 @@
-name: Publish Docker image
+name: Publish PagerDuty - CLI Docker image
 on: 
-  # Triggers the workflow on push request,
-  # but only for changes to Dockerfile.
+  # Triggers the workflow on manually.
   workflow_dispatch:
-  # push:
-  #   paths:
-  #     - "Dockerfile"
 jobs:
   build-and-push-image-to-repo:
     name: Push Docker image to Github repo.
