@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Checking what version PagerDuty CLI is being used.
         run: |
+          echo "This is a test."
           pd version
       - name: Setting up PagerDuty connection for PagerDuty CLI.
         run: |
