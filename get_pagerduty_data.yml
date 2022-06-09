@@ -1,0 +1,41 @@
+name: Get PagerDuty data and generate json objects
+on:
+  # Triggering this workflow job everyday at 16:00 UTC
+  schedule:
+  - cron: '00 16 * * *'
+  #  push: 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Branch checkout
+        uses: actions/checkout@v2
+      - name: Set up Python3
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9.9
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run main script
+        run: |
+          python main.py
+        env: 
+          PD_API_KEY: ${{ secrets.PD_API_KEY }}
+      - name: Check for changes
+        run: git status
+      - name: Setup git configs
+        run: |
+          git config user.name "GH Daily Action"
+          git config user.email "<>"
+      - name: Stage changes
+        run: git add .
+      - name: Commit changed files and push if needed
+        run: |
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Automatic update of repo's PagerDuty data on `date +'%Y-%m-%d %H:%M:%S'`"
+            git push
+          fi
