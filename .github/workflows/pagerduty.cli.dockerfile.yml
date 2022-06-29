@@ -28,5 +28,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          tags: ghcr.io/${{ steps.meta.outputs.tags }}
+          push: true
+          tags: ghcr.io/${{ steps.meta.outputs.tags }},ghcr.io/${{ steps.meta.outputs.tags }}:latest
           labels: ${{ steps.meta.outputs.labels }}
